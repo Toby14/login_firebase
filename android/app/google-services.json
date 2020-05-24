@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "943508219988",
+    "firebase_url": "https://loginwithfirebase-937a3.firebaseio.com",
+    "project_id": "loginwithfirebase-937a3",
+    "storage_bucket": "loginwithfirebase-937a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943508219988:android:8f245ef5486a07a122a5c1",
+        "android_client_info": {
+          "package_name": "com.tinhtranflutter.login_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943508219988-vfir8e963uk8c91f1jtff2if33d0ol9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd07TSNQVU53C8UUj3Sh2pJqNz3rH-w4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943508219988-vfir8e963uk8c91f1jtff2if33d0ol9i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "943508219988-717qa08pe3r16jah9fdj9kf7h208ig5b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tinhtranflutter.loginFirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
