@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_firebase/create_screen.dart';
-import 'package:login_firebase/login_screen.dart';
+import 'package:login_firebase/landing_screen.dart';
+import 'package:login_firebase/login_with_email_screen.dart';
+import 'package:login_firebase/login_with_phone_number.dart';
 import 'package:login_firebase/profile_screen.dart';
 
 void main() => runApp(MyApp());
@@ -10,11 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: LoginScreen.id,
+      initialRoute: LandingScreen.id,
       routes: {
-        LoginScreen.id: (context) => LoginScreen(),
+        LoginWithEmailScreen.id: (context) => LoginWithEmailScreen(),
         CreateScreen.id: (context) => CreateScreen(),
         ProfilePage.id: (context) => ProfilePage(),
+        LandingScreen.id: (context) => LandingScreen(),
+        LoginWithPhoneScreen.id: (context) => LoginWithPhoneScreen(),
       },
     );
   }
