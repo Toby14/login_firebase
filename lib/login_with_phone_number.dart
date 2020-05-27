@@ -3,14 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login_firebase/profile_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+String phoneNumber;
+
 class LoginWithPhoneScreen extends StatefulWidget {
   static final String id = "login_with_phone";
+  static final String getPhoneNumber = phoneNumber;
+
   @override
   _LoginWithPhoneScreenState createState() => _LoginWithPhoneScreenState();
 }
 
 class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
-  String phoneNumber;
+
   List<String> phoneList = [];
   final _firestore = Firestore.instance;
   final messageTextController = TextEditingController();
@@ -20,47 +24,61 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
   @override
   void initState() {
     super.initState();
-    foundPatient();
     retrieveInfoWithPhone();
   }
 
   void retrieveInfoWithPhone() async {
     final patients = await _firestore.collection("patients").getDocuments();
 
-    if (patients != null) {
-      String getPhone;
-      for (var eachPatient in patients.documents) {
-        getPhone = eachPatient.data["cell_number"];
+    try {
+      if (patients != null) {
+        String getPhone;
+        String doc;
+        for (var eachPatient in patients.documents) {
+          getPhone = eachPatient.data["cell_number"];
+          doc = eachPatient.documentID;
 
-        print("getphone = $getPhone");
-        print("phoneNumber = $phoneNumber");
 
-        if (getPhone != null) {
-          phoneList.add(getPhone);
+//         print("printing document: $doc");
+
+          print("getphone = $getPhone");
+      //        print("phoneNumber = $phoneNumber");
+
+          if (getPhone != null) {
+            print("come here");
+            phoneList.add(getPhone);
+            print(phoneList);
+          }
         }
 
       }
+    }  catch (e) {
+      print(e);
     }
   }
 
-  void foundPatient() {
-    if (phoneList.contains(phoneNumber)) {
+  void foundPatient(List<String> list, String checkPhone) {
+
+    if (list.contains(checkPhone)) {
       foundPhone = true;
       print("foundPhone = $foundPhone");
-      print("phoneNumber is: $phoneNumber");
+      print("phoneNumber is: $checkPhone");
       Navigator.pushNamed(context, ProfilePage.id);
+    }
+    else{
+      foundPhone = false;
     }
   }
 
-  void printList(List<String> list) {
-    if (list == null){
-      print("list = $list");
-      return;
-    }
-    for (var item in list) {
-      print(item);
-    }
-  }
+//  void printList(List<String> list) {
+//    if (list == null){
+//      print("list = $list");
+//      return;
+//    }
+//    for (var item in list) {
+//      print(item);
+//    }
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +117,10 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
                   textAlign: TextAlign.center,
                   onChanged: (value) {
                     phoneNumber = value;
+
+                    if(phoneList.contains(phoneNumber)){
+                      foundPhone = true;
+                    }
                   },
                   decoration: InputDecoration(
                     hintText: 'Ex: +14072221111',
@@ -142,13 +164,14 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
                         showSpinner = true;
                       });
 
-                      foundPatient();
+                      foundPatient(phoneList, phoneNumber);
                     }
                     else {
                       print("Please try again!");
                     }
 
                     messageTextController.clear();
+                    showSpinner = false;
                   },
                   textColor: Colors.white,
                   color: Color(0xFFFF6858),

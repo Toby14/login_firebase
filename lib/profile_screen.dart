@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_firebase/login_with_email_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:login_firebase/login_with_phone_number.dart';
 
 class ProfilePage extends StatefulWidget {
   static final id = "profile_screen";
@@ -34,9 +35,12 @@ class _ProfilePageState extends State<ProfilePage> {
   void getUser() async {
     try {
       final user = await _auth.currentUser();
+      user.uid;
+
 
       if (user != null) {
         loggedInUser = user;
+        print("user.uid ===== ${user.uid}");
         print("logged in user: ${loggedInUser.email}");
       }
     } catch (e) {
@@ -50,20 +54,21 @@ class _ProfilePageState extends State<ProfilePage> {
     if (patients != null) {
       for (var getEachPatient in patients.documents){
 
+        // Working from here to get phoneNumber pass in this class
         if (getEachPatient.documentID == "patient001") {
-          print("Printing patien001");
+//          print("Printing patien001");
           name = getEachPatient.data["name"];
-          print(name);
+//          print(name);
           address_line = getEachPatient.data["address_line"];
-          print(address_line);
+//          print(address_line);
           city = getEachPatient.data["city"];
-          print(city);
+//          print(city);
           postal_code = getEachPatient.data["postal_code"];
-          print(postal_code);
+//          print(postal_code);
           country = getEachPatient.data["country"];
-          print(country);
+//          print(country);
           gender = getEachPatient.data["gender"];
-          print(gender);
+//          print(gender);
           break;
         }
 
@@ -122,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text("Name: $name"),
+                            Text("Name: $name ${LoginWithPhoneScreen.getPhoneNumber}"),
                             SizedBox(
                               width: 150.0,
                               height: 5.0,
