@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:login_firebase/create_screen.dart';
 import 'package:login_firebase/landing_screen.dart';
 import 'package:login_firebase/login_with_email_screen.dart';
-import 'package:login_firebase/login_with_phone_number.dart';
+import 'package:login_firebase/login_with_phone.dart';
 import 'package:login_firebase/profile_screen.dart';
 
 void main() => runApp(MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         CreateScreen.id: (context) => CreateScreen(),
         ProfilePage.id: (context) => ProfilePage(),
         LandingScreen.id: (context) => LandingScreen(),
-        LoginWithPhoneScreen.id: (context) => LoginWithPhoneScreen(),
+        LoginWithPhone.id: (context) => LoginWithPhone(),
       },
     );
   }

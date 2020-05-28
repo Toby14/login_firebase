@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:login_firebase/login_with_email_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:login_firebase/login_with_phone_number.dart';
 
 class ProfilePage extends StatefulWidget {
   static final id = "profile_screen";
+  final String phone;
+  final FirebaseUser user;
+
+  ProfilePage({this.phone, this.user});
 
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -24,21 +26,21 @@ class _ProfilePageState extends State<ProfilePage> {
   String gender;
 
 
+//
+//  @override
+//  void initState() {
+//    super.initState();
+//    getUser();
+////    getPatients();
+//  }
 
-  @override
-  void initState() {
-    super.initState();
-    getUser();
-    getPatients();
-  }
-
+  // authentication for email/pass only
   void getUser() async {
     try {
       final user = await _auth.currentUser();
-      user.uid;
-
 
       if (user != null) {
+        user.uid;
         loggedInUser = user;
         print("user.uid ===== ${user.uid}");
         print("logged in user: ${loggedInUser.email}");
@@ -127,52 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text("Name: $name ${LoginWithPhoneScreen.getPhoneNumber}"),
-                            SizedBox(
-                              width: 150.0,
-                              height: 5.0,
-                              child: Divider(
-                                color: Colors.blueGrey.shade900,
-
-                              ),
-                            ),
-                            Text("Address: $address_line"),
-                            SizedBox(
-                              width: 150.0,
-                              height: 5.0,
-                              child: Divider(
-                                color: Colors.blueGrey.shade900,
-
-                              ),
-                            ),
-                            Text("City: $city"),
-                            SizedBox(
-                              width: 150.0,
-                              height: 5.0,
-                              child: Divider(
-                                color: Colors.blueGrey.shade900,
-
-                              ),
-                            ),
-                            Text("Zipcode: $postal_code"),
-                            SizedBox(
-                              width: 150.0,
-                              height: 5.0,
-                              child: Divider(
-                                color: Colors.blueGrey.shade900,
-
-                              ),
-                            ),
-                            Text("Country: $country"),
-                            SizedBox(
-                              width: 150.0,
-                              height: 5.0,
-                              child: Divider(
-                                color: Colors.blueGrey.shade900,
-
-                              ),
-                            ),
-                            Text("Gender: $gender")
+                            Text("Hello there,")
                           ],
                         ),
                       ),

@@ -3,23 +3,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:login_firebase/profile_screen.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-String phoneNumber;
 
-class LoginWithPhoneScreen extends StatefulWidget {
+class LoginWithPhonePractice extends StatefulWidget {
   static final String id = "login_with_phone";
-  static final String getPhoneNumber = phoneNumber;
+
 
   @override
-  _LoginWithPhoneScreenState createState() => _LoginWithPhoneScreenState();
+  _LoginWithPhonePracticeState createState() => _LoginWithPhonePracticeState();
 }
 
-class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
+class _LoginWithPhonePracticeState extends State<LoginWithPhonePractice> {
 
   List<String> phoneList = [];
   final _firestore = Firestore.instance;
   final messageTextController = TextEditingController();
   bool showSpinner = false;
   bool foundPhone = false;
+  String phoneNumber;
 
   @override
   void initState() {
@@ -55,6 +55,8 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
     }  catch (e) {
       print(e);
     }
+
+    foundPatient(phoneList, phoneNumber);
   }
 
   void foundPatient(List<String> list, String checkPhone) {
@@ -63,7 +65,9 @@ class _LoginWithPhoneScreenState extends State<LoginWithPhoneScreen> {
       foundPhone = true;
       print("foundPhone = $foundPhone");
       print("phoneNumber is: $checkPhone");
-      Navigator.pushNamed(context, ProfilePage.id);
+      Navigator.push(context, MaterialPageRoute(
+        builder: (context) => ProfilePage(phone: phoneNumber),
+      ) );
     }
     else{
       foundPhone = false;

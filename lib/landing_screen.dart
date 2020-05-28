@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_firebase/login_with_email_screen.dart';
-import 'login_with_phone_number.dart';
+import 'login_with_phone_number_practice.dart';
 
 
 class LandingScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _LandingScreenState extends State<LandingScreen> {
                 ],
               ),
               onPressed: (){
-                Navigator.pushNamed(context, LoginWithPhoneScreen.id);
+                Navigator.pushNamed(context, LoginWithPhonePractice.id);
               },
             ),
             
