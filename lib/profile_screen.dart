@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            Text("Hello there,")
+                            Text("Hello there, ${widget.user.phoneNumber}")
                           ],
                         ),
                       ),

@@ -56,6 +56,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
 
         // Manually ask the user to input the code that was sent to their phone number
         codeSent: (String verificationID, [int forceResendingToken]) {
+
           showDialog(
               context: context,
               barrierDismissible: false,
@@ -84,6 +85,8 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
 
                         AuthResult result =
                             await _auth.signInWithCredential(credential);
+                        // pop up to the landing screen
+                        Navigator.of(context).pop();
 
                         _loggedInUser = result.user;
 
@@ -102,6 +105,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                   ],
                 );
               });
+
         },
         codeAutoRetrievalTimeout: null);
   }
@@ -166,7 +170,11 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                   height: 15.0,
                 ),
                 Text(
-                  "Tip: Login to retrieve your information, and you wil be redirecting to Profile screen",
+                  "Tip: By clicking on Login button, you'll be registering your "
+                      "phone number on our Database. You will be redirecting to "
+                      "the profile screen if your sim card is inserted on your phone; "
+                      "otherwise, you'll be riquired to manually enter the verification code .",
+
                   style: TextStyle(
                     color: Colors.grey,
                   ),
@@ -188,7 +196,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
 
                       loginUser(phoneNumber);
 
-//                    _phoneController.clear();
+                    _phoneController.clear();
 
                     showSpinner = false;
                   },
